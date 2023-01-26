@@ -1,0 +1,32 @@
+<div id="navigation" class="navbar navbar-expand-md px-3">
+  <a href="#" class="navbar-brand"
+    ><img src="/static/logo.png" /><strong>eDc</strong></a
+  >
+  <div class="w-50">
+    <form method="POST" action="/">
+      <div class="position-relative d-flex">
+        <input class="form-control" id="searchInput" />
+        <button class="btn btn-outline-dark search-btn" type="submit">
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+  <button
+    class="navbar-toggler"
+    data-bs-toggle="collapse"
+    data-bs-target="#menu"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="menu">
+    <ul class="navbar-nav ms-auto loc_nav" style="list-style: none">
+      <li class="nav-item mx-3"><a href="#" class="nav-link">Home</a></li>
+      <li class="nav-item mx-3"><a href="#" class="nav-link">Following</a></li>
+      <li class="nav-item mx-3"><a href="#" class="nav-link">Explore</a></li>
+      <li class="nav-item mx-3">
+        <a class="nav-link"><i class="fa-solid fa-ellipsis fs-4"></i></a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+{% extends "base.html" %} {{super}} {% block title %} Medc... {% endblock %}
+{%block content%} {% include 'nav.html' %}
+<div class="container-fluid">
+  <div class="row text-center loc_card">
+    {% for _ in range(10): %}
+    <div class="col cols-xl-5 cols-xxl-6">{% include 'card.html' %}</div>
+    {% endfor %}
+  </div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,32 @@
+body {
+}
+
+#navigation {
+  background-color: #f7efe5;
+}
+#searchInput {
+  margin-left: 20%;
+  margin-right: 20px;
+  /* min-width: 40px; */
+}
+
+.loc_card {
+  padding: 20px;
+}
+.row .col .card {
+  display: flex;
+  margin: 10%;
+  width: 250px;
+  background-color: #fffbf5;
+}
+
+.product_title {
+  margin: 0;
+}
+.product_subtitle {
+  font-size: smaller;
+}
+
+.navbar .navbar-nav li a {
+  color: black;
+}
