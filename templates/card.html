@@ -1,10 +1,15 @@
 <div class="card rounded-3 shadow-sm">
-  <div class="card-body">
-    <img class="card-img-top card_img" src="/static/card_test_img.webp" />
-    <p class="product_title">Panadol 500mg</p>
-    <p class="product_subtitle">Rapid Pain Reliver Tablets</p>
-    <h4 class="card-title pricing-card-title">$0</h4>
-    <ul class="list-unstyled mt-3 mb-4"></ul>
-    <button type="button" class="w-50 btn btn-outline-dark">Add to cart</button>
+  <div class="card-head">
+    <img class="card_img" src="/static/{{product.image}}" />
+  </div>
+  <div class="card-body p-0">
+    <p class="product_title">{{product.name[:50]}}</p>
+    <p class="product_subtitle">{{product.brand}}</p>
+    <h4 class="card-title pricing-card-title">{{product.selling_price}}</h4>
+  </div>
+  <div class="card-footer">
+    <button type="button" class="w-50 btn btn-outline-secondary pb-2 card_btn">
+      Add to cart
+    </button>
   </div>
 </div>

@@ -1,0 +1,7 @@
+  # create a get request to fetch all the data 
+  # create a login view 
+  # create a register view 
+
+  # create a route to handle login and registration 
+  # update the ui of the homepage
+  
