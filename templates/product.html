@@ -1,9 +1,9 @@
 {% extends "base.html" %} {{super}} {% block title %} Medc... {% endblock %}
 {%block content%} {% include 'nav.html' %}
-<div class="container-fluid">
+<div class="container overflow-hidden main_container">
   <div class="row text-center loc_card">
     {% for product in products %}
-    <div class="col cols-xl-5 cols-xxl-6">{% include 'card.html' %}</div>
+    <div class="col col-md-3">{% include 'card.html' %}</div>
     {% endfor %}
   </div>
 </div>

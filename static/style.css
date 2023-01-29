@@ -1,10 +1,13 @@
 body {
   background-color: #b9f3fc;
+  overflow: hidden;
+  font-family: "Montserrat", sans-serif;
 }
 
 #navigation {
-  background-color: #00fff6;
+  /* background-color: #00fff6; */
 }
+
 .navbar .navbar-nav li a {
   color: black;
 }
