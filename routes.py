@@ -7,13 +7,6 @@ from model import Product
 # User registeration route
 
 
-@app.route('/register', methods=['GET', 'POST'])
-def registration():
-    if request == "POST":
-        pass
-    pass
-
-
 # home route -- need to desing the homepage for the website
 
 
