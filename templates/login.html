@@ -14,7 +14,7 @@
             >
           </li>
           <li class="nav-item">
-            <button class="btn btn-light ms-3">Create an account</button>
+            <button class="btn btn-info ms-3">Create an account</button>
           </li>
         </div>
       </div>
@@ -24,16 +24,16 @@
   <div
     class="mt-auto container d-flex align-items-center justify-content-center"
   >
-    <div class="">
+    <div class="login_form">
       <h2 class="text-center mb-5">Sign In</h2>
-      {{form.google_login(class="btn btn-primary mb-3 ")}}
+      {{form.google_login(class="btn btn-primary mb-3 login_btn")}}
       <hr data-content="or sign with your email" class="hr-text mb-3" />
-
       <form method="POST" action="/">
-        {{form.email.label(class='mb-1')}} {{form.email(class="form-control
+        {{form.email.label(class='mb-1 ')}} {{form.email(class="form-control
         mb-2")}} {{form.password.label(class='mb-1')}}
+        <a href="#">{{form.forgot_password(class='ms-5')}}</a>
         {{form.password(class="form-control mb-5")}} {{form.login(class='btn
-        btn-success w-100')}}
+        btn-success w-100 login_btn')}}
       </form>
     </div>
   </div>

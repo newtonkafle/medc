@@ -1,7 +1,5 @@
 body {
-  background-color: #b9f3fc;
-  overflow: hidden;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 #navigation {
@@ -48,4 +46,13 @@ body {
 }
 .card_btn {
   background-color: #00e7ff;
+}
+
+/* login section  */
+
+.login_form {
+  font-size: 0.9rem;
+}
+.btn {
+  font-size: 0.9rem;
 }

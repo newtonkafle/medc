@@ -13,18 +13,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk&family=Ubuntu&display=swap"
       rel="stylesheet"
     />
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
 
     <!-- Bootstrap CSS -->
+
+    {{ bootstrap.load_css() }}
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
-
-    {{ bootstrap.load_css() }} {% endblock %}
+    {% endblock %}
 
     <title>{% block title %} {% endblock %}</title>
     {% endblock %}
