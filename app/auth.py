@@ -1,5 +1,6 @@
 import datetime
 import functools
+from cryptography.fernet import Fernet
 
 from flask import (
     Blueprint, redirect, render_template, request, session, url_for
@@ -20,17 +21,16 @@ def calc_year():
 def register():
     form = Register()
     if request.method == 'POST':
-        # if form.validate_on_submit():
-        #     user = User(first_name=form.first_name.data,
-        #                 middle_name=form.middle_name.data,
-        #                 last_name=form.last_name.data,
-        #                 email=form.email.data,
-        #                 password=form.password.data)
-        #     db.session.add(user)
-        #     db.commit()
-        # return redirect(url_for('login'))
-        print(form.email.data)
-
+        if form.validate_on_submit():
+            user = User(first_name=encrypt_item(form.first_name.data),
+                        middle_name=encrypt_item(form.middle_name.data),
+                        last_name=encrypt_item(form.last_name.data),
+                        email=encrypt_item(form.email.data),
+                        password=generate_password_hash(form.password.data)
+                        )
+            db.session.add(user)
+            db.session.commit()
+            return redirect(url_for('auth.login'))
     return render_template("auth/sign_up.html", form=form, year=calc_year())
 
 
@@ -38,3 +38,11 @@ def register():
 def login():
     form = Login()
     return render_template('auth/login.html', form=form, year=calc_year())
+
+
+def encrypt_item(item):
+    item = item.encode()
+    key = Fernet.generate_key()
+    d_key = Fernet(key)
+    item = d_key.encrypt(item)
+    return item
