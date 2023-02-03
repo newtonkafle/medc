@@ -10,8 +10,8 @@ class SearchBar(FlaskForm):
 
 
 class Login(FlaskForm):
-    email = EmailField('Email address', validators=[DataRequired(), Length(
-        max=100), Email(message='Type correct email address')], render_kw={'placeholder': 'Enter email here..'})
+    email = EmailField('Email address', validators=[
+                       DataRequired(), Length(max=100)])
     password = PasswordField("Password", validators=[DataRequired()], render_kw={
                              'placeholder': 'Enter password here..'})
     forgot_password = Label(text='Forgot password?',
@@ -27,8 +27,8 @@ class Register(FlaskForm):
                             DataRequired(), Length(max=50)], render_kw={'placeholder': 'Lastname..'})
     middle_name = StringField('Middle Name', validators=[
                               DataRequired(), Length(max=50)], render_kw={'placeholder': 'Middlename..'})
-    email = EmailField('Email address', validators=[DataRequired(), Length(
-        max=100), Email(message='Type correct email address')], render_kw={'placeholder': 'Enter email here..'})
+    email = EmailField('Email address', validators=[
+                       DataRequired(), Length(max=100)])
     password = PasswordField("Password", validators=[DataRequired()], render_kw={
                              'placeholder': 'Enter password here..'})
 
