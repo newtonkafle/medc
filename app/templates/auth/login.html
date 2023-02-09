@@ -26,11 +26,13 @@
   >
     <div class="login_form">
       <h2 class="text-center mb-5">Sign In</h2>
-      {{form.google_login(class="btn btn-primary mb-3 login_btn")}}
+      {{form.google_login(class="btn btn-primary mb-3 login_btn")}} {{
+      form.csrf_token }}
       <hr data-content="or sign with your email" class="hr-text mb-3" />
-      <form method="POST" action="/">
-        {{form.email.label(class='mb-1 ')}} {{form.email(class="form-control
-        mb-2")}} {{form.password.label(class='mb-1')}}
+      <form method="POST" action="{{url_for('auth.login')}}">
+        {{ form.csrf_token }} {{form.email.label(class='mb-1 ')}}
+        {{form.email(class="form-control mb-2")}}
+        {{form.password.label(class='mb-1')}}
         <a href="#">{{form.forgot_password(class='ms-5')}}</a>
         {{form.password(class="form-control mb-5")}} {{form.login(class='btn
         btn-success w-100 login_btn')}}

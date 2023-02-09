@@ -43,3 +43,9 @@ class Register(FlaskForm):
                                      render_kw={'placeholder': 'Confirm the password..'})
     submit = SubmitField("Submit")
     google_login = SubmitField("Sign In using Google Account")
+
+
+class FindAccount(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Length(max=50)],
+                        render_kw={'placeholder': 'Email..'})
+    search = SubmitField('Find Account')

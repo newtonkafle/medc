@@ -1,7 +1,7 @@
 import datetime
 import os
 from flask import Flask
-from .extension import db, bootstrap, csrf
+from .extension import db, bootstrap, csrf, login_manager
 from .auth import auth_bp
 from .product import product_bp
 
@@ -24,6 +24,8 @@ def create_app(test_config=None):
     bootstrap.init_app(app)
     db.init_app(app)
     csrf.init_app(app)
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
     with app.app_context():
         db.create_all()
 
