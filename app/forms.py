@@ -48,4 +48,13 @@ class Register(FlaskForm):
 class FindAccount(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Length(max=50)],
                         render_kw={'placeholder': 'Email..'})
+    gen_label = Label(text='Please enter your valid email address',
+                      field_id='label')
     search = SubmitField('Find Account')
+
+
+class VerifyAccount(FlaskForm):
+    code_field = StringField('Verification Code', validators=[DataRequired(), Length(max=10)],
+                             render_kw={'placeholder': 'Code..'})
+    submit = SubmitField("Verify")
+    resend = SubmitField("Resend")

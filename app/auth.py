@@ -79,7 +79,7 @@ def find_account():
         user = db.select(User).filter_by(email=form.email.data)
         if user is not None:
             return redirect(url_for('auth.verification'))
-    return render_template('')
+    return render_template('auth/find_account.html', form=form)
 
 
 @auth_bp.route('/verification', methods=('GET', 'POST'))
