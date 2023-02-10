@@ -1,5 +1,4 @@
 import datetime
-import functools
 from cryptography.fernet import Fernet
 
 from flask import (
@@ -10,6 +9,7 @@ from .forms import Register, Login, FindAccount, VerifyAccount, ChangePassword
 from .models import User, db
 from .extension import login_manager
 from flask_login import login_user, current_user
+from .twf_auth import send_code
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
@@ -80,6 +80,8 @@ def find_account():
     if request.method == 'POST':
         user = db.select(User).filter_by(email=form.email.data)
         if user is not None:
+            send_code(form.email.data)
+            # need to send the email with the code for the verificaion purpose
             return redirect(url_for('auth.verification'))
     return render_template('auth/find_account.html', form=form)
 
@@ -87,6 +89,15 @@ def find_account():
 @auth_bp.route('/verification', methods=('GET', 'POST'))
 def verification():
     form = VerifyAccount()
+    if request.method == "POST":
+        if form.validate_on_submit():
+
+            # get the verification code
+            # compare with the code generated
+            # if success procced to the change password route
+            # if not return to page where user will ask for try again
+            pass
+
     return render_template('auth/verify.html', form=form)
 
 

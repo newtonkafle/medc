@@ -28,6 +28,7 @@
         <img src="/static/search.png" class="find_account_logo" />
       </div>
       <form action="{{url_for('auth.find_account')}}" method="POST">
+        {{form.csrf_token }}
         <div class="mx-auto w-75 my-3 text-center">
           {{form.gen_label(class='h2 fw-bold')}}
         </div>
