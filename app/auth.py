@@ -6,7 +6,7 @@ from flask import (
     Blueprint, redirect, render_template, request, session, url_for, flash,
 )
 from werkzeug.security import check_password_hash, generate_password_hash
-from .forms import Register, Login, FindAccount
+from .forms import Register, Login, FindAccount, VerifyAccount, ChangePassword
 from .models import User, db
 from .extension import login_manager
 from flask_login import login_user, current_user
@@ -63,6 +63,8 @@ def logout():
 
 @auth_bp.route('/change_password')
 def change_password():
+    form = ChangePassword()
+    return render_template('auth/change_password.html', form=form)
     # first ask user for the username or the email
     # check if the email exists in the database
     # send the random number generated to the user email
@@ -84,7 +86,8 @@ def find_account():
 
 @auth_bp.route('/verification', methods=('GET', 'POST'))
 def verification():
-    pass
+    form = VerifyAccount()
+    return render_template('auth/verify.html', form=form)
 
 
 def encrypt_item(item):

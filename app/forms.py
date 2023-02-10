@@ -54,7 +54,30 @@ class FindAccount(FlaskForm):
 
 
 class VerifyAccount(FlaskForm):
-    code_field = StringField('Verification Code', validators=[DataRequired(), Length(max=10)],
+    gen_label = Label(text='Verification',
+                      field_id='label')
+
+    code_field = StringField(validators=[DataRequired(), Length(max=10)],
                              render_kw={'placeholder': 'Code..'})
-    submit = SubmitField("Verify")
+    send_btn = SubmitField("Verify")
     resend = SubmitField("Resend")
+
+
+class ChangePassword(FlaskForm):
+
+    gen_label = Label(text='Create New Password',
+                      field_id='label')
+
+    new_passwd = PasswordField('New Password',
+                               validators=[DataRequired(),
+                                           Length(max=15, min=6),
+                                           EqualTo('passwd_confirm',
+                                                   message='Please enter the matching password')],
+                               render_kw={'placeholder': 'Password..'})
+
+    passwd_confirm = PasswordField('Confirm Password',
+                                   validators=[DataRequired(),
+                                               Length(max=15, min=6)],
+                                   render_kw={'placeholder': 'Confirm Password'})
+
+    submit = SubmitField('Change Password')
