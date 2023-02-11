@@ -60,7 +60,7 @@ class VerifyAccount(FlaskForm):
     code_field = StringField(validators=[DataRequired(), Length(max=10)],
                              render_kw={'placeholder': 'Code..'})
     send_btn = SubmitField("Verify")
-    resend = SubmitField("Resend")
+    resend_btn = SubmitField("Resend")
 
 
 class ChangePassword(FlaskForm):

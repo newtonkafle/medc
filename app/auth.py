@@ -2,7 +2,7 @@ import datetime
 from cryptography.fernet import Fernet
 
 from flask import (
-    Blueprint, redirect, render_template, request, session, url_for, flash,
+    Blueprint, redirect, render_template, request, session, url_for, flash, current_app
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 from .forms import Register, Login, FindAccount, VerifyAccount, ChangePassword
@@ -61,17 +61,15 @@ def logout():
     pass
 
 
-@auth_bp.route('/change_password')
+@auth_bp.route('/change_password', methods=('GET', 'POST'))
 def change_password():
     form = ChangePassword()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            user = User.query.filter_by(email=current_user.email).first()
+            user.password = generate_password_hash(form.new_passwd.data)
+            return redirect(url_for('auth.login'))
     return render_template('auth/change_password.html', form=form)
-    # first ask user for the username or the email
-    # check if the email exists in the database
-    # send the random number generated to the user email
-    # comapare the random number inputed by user with the number generated
-    # if true let user change the password
-    # process must be completed with a minute, after a minute user must send request again for the random number
-    pass
 
 
 @auth_bp.route('/find_account', methods=('GET', 'POST'))
@@ -80,6 +78,7 @@ def find_account():
     if request.method == 'POST':
         user = db.select(User).filter_by(email=form.email.data)
         if user is not None:
+            current_user = user
             send_code(form.email.data)
             # need to send the email with the code for the verificaion purpose
             return redirect(url_for('auth.verification'))
@@ -89,16 +88,17 @@ def find_account():
 @auth_bp.route('/verification', methods=('GET', 'POST'))
 def verification():
     form = VerifyAccount()
+    is_there = True
     if request.method == "POST":
-        if form.validate_on_submit():
-
-            # get the verification code
-            # compare with the code generated
-            # if success procced to the change password route
-            # if not return to page where user will ask for try again
-            pass
-
-    return render_template('auth/verify.html', form=form)
+        if not form.validate_on_submit():
+            flash("All requirements doesn't meet")
+            return
+        if form.code_field.data == current_app.config['CODE']:
+            return redirect(url_for('auth.change_password'))
+        else:
+            is_there = False
+            return redirect(url_for('auth.verification'))
+    return render_template('auth/verify.html', form=form, is_there=is_there)
 
 
 def encrypt_item(item):

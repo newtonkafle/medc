@@ -24,10 +24,11 @@
   </div>
   <div class="d-flex justify-content-center align-items-center my-auto">
     <div class="shadow-lg rounded">
+      {% if is_there == True %}
       <div class="d-flex justify-content-center my-3">
         <img src="/static/computer.png" class="find_account_logo" />
       </div>
-      <form action="{{url_for('auth.find_account')}}" method="POST">
+      <form action="{{url_for('auth.verification')}}" method="POST">
         {{form.csrf_token }}
         <div class="mx-auto w-75 my-3 text-center">
           {{form.gen_label(class='h2 fw-bold')}}
@@ -40,6 +41,14 @@
           {{form.send_btn(class="btn btn-primary fs-6")}}
         </div>
       </form>
+      {% else %}
+      <div class="d-flex justify-content-center my-3">
+        <img src="/static/verification_faild.png" class="find_account_logo" />
+      </div>
+      <div class="d-flex justify-content-center my-4">
+        {{form.resend_btn(class="btn btn-primary fs-6")}}
+      </div>
+      {% endif %}
     </div>
   </div>
 
