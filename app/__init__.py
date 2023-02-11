@@ -4,6 +4,7 @@ from flask import Flask
 from .extension import db, bootstrap, csrf, login_manager
 from .auth import auth_bp
 from .product import product_bp
+import twf_auth
 
 
 def create_app(test_config=None):
