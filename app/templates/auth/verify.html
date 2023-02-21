@@ -24,7 +24,7 @@
   </div>
   <div class="d-flex justify-content-center align-items-center my-auto">
     <div class="shadow-lg rounded">
-      {% if is_there == True %}
+      {% if is_resend == True %}
       <div class="d-flex justify-content-center my-3">
         <img src="/static/computer.png" class="find_account_logo" />
       </div>
@@ -43,10 +43,15 @@
       </form>
       {% else %}
       <div class="d-flex justify-content-center my-3">
-        <img src="/static/verification_faild.png" class="find_account_logo" />
+        <img src="/static/verification_failed.png" class="find_account_logo" />
+      </div>
+      <div class="d-flex justify-content-center my-3">
+        <p class="fs-4 fw-bold">Verification Failed</p>
       </div>
       <div class="d-flex justify-content-center my-4">
-        {{form.resend_btn(class="btn btn-primary fs-6")}}
+        <a href="{{url_for('auth.verification')}}">
+          {{form.resend_btn(class="btn btn-primary fs-6" )}}
+        </a>
       </div>
       {% endif %}
     </div>

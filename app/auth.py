@@ -9,8 +9,13 @@ from .forms import Register, Login, FindAccount, VerifyAccount, ChangePassword
 from .models import User, db
 from .extension import login_manager
 from flask_login import login_user, current_user
-from .twf_auth import send_code
+from .twf_auth import send_email, generate_random_code
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+
+# global variables
+is_resend = True
+is_gen = False
 
 
 def calc_year():
@@ -78,8 +83,8 @@ def find_account():
     if request.method == 'POST':
         user = db.select(User).filter_by(email=form.email.data)
         if user is not None:
-            current_user = user
-            send_code(form.email.data)
+            current_app.config['CODE'] = generate_random_code()
+            # send_email(form.email.data, current_app.config['CODE'])
             # need to send the email with the code for the verificaion purpose
             return redirect(url_for('auth.verification'))
     return render_template('auth/find_account.html', form=form)
@@ -87,18 +92,32 @@ def find_account():
 
 @auth_bp.route('/verification', methods=('GET', 'POST'))
 def verification():
+    global is_resend, is_gen
     form = VerifyAccount()
-    is_there = True
+
+# revert back to the code view
+    if not is_gen:
+        is_resend = True
+
+# checks whether to generated new code or not
+    if is_gen:
+        current_app.config['CODE'] = generate_random_code()
+        # send_email(form.email.data, current_app.config['CODE'])
+        is_gen = False
+
     if request.method == "POST":
         if not form.validate_on_submit():
             flash("All requirements doesn't meet")
             return
+        # checks wether the user input is correct or not
         if form.code_field.data == current_app.config['CODE']:
             return redirect(url_for('auth.change_password'))
         else:
-            is_there = False
+            # opens door to the resend view
+            is_resend = False
+            is_gen = True
             return redirect(url_for('auth.verification'))
-    return render_template('auth/verify.html', form=form, is_there=is_there)
+    return render_template('auth/verify.html', form=form, is_resend=is_resend)
 
 
 def encrypt_item(item):
